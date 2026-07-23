@@ -22,3 +22,6 @@ export const updateNoteSchema = z.object({
     .max(999, "Content is too long")
     .optional()
 });
+
+export type createNoteInput = z.infer<typeof createNoteSchema>;
+export type updateNoteInput = z.infer<typeof updateNoteSchema>;
