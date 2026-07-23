@@ -83,14 +83,16 @@ export const updateNote = asyncHandler(async (req: Request, res: Response, next:
   res.status(200).json({
     message: "Note updated"
   })
+  
 });
 
 export const deleteNote = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-  const noteId = req.params;
+  const noteId = req.params.id;
 
   const noteResult = await pool.query(`
     SELECT id
     FROM notes
+    WHERE id=$1
     `, [noteId]);
 
   if (noteResult.rows.length === 0) throw new AppError("Note not found", 404);
@@ -103,5 +105,5 @@ export const deleteNote = asyncHandler(async (req: Request, res: Response, next:
   res.status(200).json({
     message: "Note deleted"
   })
-  
+
 });
