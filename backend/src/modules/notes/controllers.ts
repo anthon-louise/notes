@@ -24,7 +24,7 @@ export const createNote = asyncHandler(async (req: Request, res: Response, next:
 export const getNotes = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
 
   const noteResults = await pool.query<Note>(`
-    SELECT title, content, created_at
+    SELECT id, title, content, created_at
     FROM notes
     `);
 
@@ -34,3 +34,19 @@ export const getNotes = asyncHandler(async (req: Request, res: Response, next: N
   });
 
 })
+
+export const getNoteById = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+
+  const noteId = req.params.id;
+
+  const noteResult = await pool.query<Note>(`
+    SELECT id, title, content, created_at
+    FROM notes
+    WHERE id=$1
+    `, [noteId]);
+
+  res.json({
+    message: "Note fetched",
+    note: noteResult.rows[0]
+  })
+});
