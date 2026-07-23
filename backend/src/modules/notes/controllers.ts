@@ -72,8 +72,6 @@ export const updateNote = asyncHandler(async (req: Request, res: Response, next:
   const title = data.title ?? note.title
   const content = data.content ?? note.content
 
-  console.log(content)
-
   await pool.query(`
     UPDATE notes
     SET title=$1, content=$2
@@ -83,7 +81,7 @@ export const updateNote = asyncHandler(async (req: Request, res: Response, next:
   res.status(200).json({
     message: "Note updated"
   })
-  
+
 });
 
 export const deleteNote = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
