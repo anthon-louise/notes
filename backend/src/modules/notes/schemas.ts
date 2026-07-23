@@ -9,7 +9,6 @@ export const createNoteSchema = z.object({
     .string()
     .max(999, "Title is too long")
     .optional()
-    .default("")
 });
 
 export const updateNoteSchema = createNoteSchema.partial();
