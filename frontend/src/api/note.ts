@@ -7,7 +7,7 @@ export const fetchNotes = async (): Promise<Note[]> => {
   return res.data.notes;
 }
 
-export const fetchNotesById = async (id: number): Promise<Note> => {
+export const fetchNoteById = async (id: number): Promise<Note> => {
   const res = await api.get(`/notes/${id}`);
   return res.data.note;
 }
